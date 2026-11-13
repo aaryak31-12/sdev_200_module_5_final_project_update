@@ -1,13 +1,13 @@
 
 import java.time.LocalDate;
 
-// Income also inherits from Transaction
+// income also inherits from Transaction
 public class Income extends Transaction {
 
     private String source;
     private String incomeType;
 
-    // Constructor
+    //Constructor
     public Income(int transactionID, double amount,
                   LocalDate date, String description,
                   String category, String source,

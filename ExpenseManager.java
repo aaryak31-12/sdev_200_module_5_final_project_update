@@ -8,19 +8,19 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-// This class manages the list of all transactions
+// this class manages the list of all transactions
 public class ExpenseManager {
 
     private ArrayList<Transaction> transactions;
     private String fileName;
 
-    // Constructor
+    //constructor
     public ExpenseManager(String fileName) {
         transactions = new ArrayList<Transaction>();
         setFileName(fileName);
     }
 
-    // Returns a copy of the transaction list
+    //returning a copy of the transaction list
     public ArrayList<Transaction> getTransactions() {
         return new ArrayList<Transaction>(transactions);
     }
@@ -36,13 +36,13 @@ public class ExpenseManager {
         this.fileName = fileName;
     }
 
-    // Adds a new transaction
+    // adding a new transaction
     public void addTransaction(Transaction transaction) {
         if (transaction == null) {
             throw new IllegalArgumentException("Transaction cannot be null");
         }
 
-        // Do not allow duplicate IDs
+        // does not allow duplicate ids
         if (findTransaction(transaction.getTransactionID()) != null) {
             throw new IllegalArgumentException("Duplicate transaction ID");
         }
@@ -50,7 +50,7 @@ public class ExpenseManager {
         transactions.add(transaction);
     }
 
-    // Updates an existing transaction
+    // updating an existing transaction
     public boolean updateTransaction(Transaction transaction) {
         if (transaction == null) {
             throw new IllegalArgumentException("Transaction cannot be null");
@@ -66,7 +66,7 @@ public class ExpenseManager {
         return false;
     }
 
-    // Removes a transaction using its ID
+    // removing a transaction using its ID
     public boolean removeTransaction(int transactionID) {
         for (int i = 0; i < transactions.size(); i++) {
             if (transactions.get(i).getTransactionID() == transactionID) {
@@ -77,7 +77,7 @@ public class ExpenseManager {
         return false;
     }
 
-    // Searches for a transaction using its ID
+    // searching for a transaction using its ID
     public Transaction findTransaction(int transactionID) {
         for (Transaction transaction : transactions) {
             if (transaction.getTransactionID() == transactionID) {
@@ -87,7 +87,7 @@ public class ExpenseManager {
         return null;
     }
 
-    // Calculates total expenses
+    // calculating total expenses
     public double getTotalExpenses() {
         double total = 0;
 
@@ -99,7 +99,7 @@ public class ExpenseManager {
         return total;
     }
 
-    // Calculates total income
+    // calculating total income
     public double getTotalIncome() {
         double total = 0;
 
@@ -111,7 +111,7 @@ public class ExpenseManager {
         return total;
     }
 
-    // Saves all transactions to a text file
+    // saving all transactions to a text file
     public void saveTransactions() throws IOException {
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
@@ -126,7 +126,7 @@ public class ExpenseManager {
                 writer.println(transaction.getDescription());
                 writer.println(transaction.getCategory());
 
-                // Saves additional expense information
+                // saving additional expense information
                 if (transaction instanceof Expense) {
                     Expense expense = (Expense) transaction;
 
@@ -135,7 +135,7 @@ public class ExpenseManager {
                     writer.println(expense.isRecurring());
                 }
 
-                // Saves additional income information
+                // saving additional income information
                 else if (transaction instanceof Income) {
                     Income income = (Income) transaction;
 
@@ -150,13 +150,13 @@ public class ExpenseManager {
         }
     }
 
-    // Loads transactions from the saved text file
+    // loading transactions from the saved text file
     public void loadTransactions() throws IOException {
 
         ArrayList<Transaction> loaded = new ArrayList<Transaction>();
         File file = new File(fileName);
 
-        // If file does not exist, start with an empty list
+        // if the file does not exist, it starts with an empty lists
         if (!file.exists()) {
             transactions = loaded;
             return;
@@ -169,7 +169,7 @@ public class ExpenseManager {
 
             while ((type = reader.readLine()) != null) {
 
-                // Read common fields
+                // reading common fields
                 int id = Integer.parseInt(readSavedLine(reader));
                 double amount = Double.parseDouble(readSavedLine(reader));
                 LocalDate date = LocalDate.parse(readSavedLine(reader));
@@ -207,7 +207,7 @@ public class ExpenseManager {
                     throw new IllegalArgumentException("Unknown transaction type");
                 }
 
-                // Prevent duplicate IDs in saved data
+                // preventing duplicate IDs in saved data
                 for (Transaction old : loaded) {
                     if (old.getTransactionID() == transaction.getTransactionID()) {
                         throw new IllegalArgumentException("Duplicate saved ID");
@@ -223,11 +223,11 @@ public class ExpenseManager {
                     exception);
         }
 
-        // Replaces the old list with loaded transactions
+        // replacing the old list with loaded transactions
         transactions = loaded;
     }
 
-    // Reads one line from the saved file
+    // reading one line from the saved file
     private String readSavedLine(BufferedReader reader) throws IOException {
         String line = reader.readLine();
 

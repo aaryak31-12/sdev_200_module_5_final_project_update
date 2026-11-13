@@ -11,7 +11,7 @@ public class ExpenseTest {
                 "Groceries", "Food", "Debit Card",
                 "Walmart", false);
 
-        // Test getters and inheritance
+        // testing getters and inheritance
         check("Expense ID", expense.getTransactionID() == 2);
         check("Payment method",
                 expense.getPaymentMethod().equals("Debit Card"));
@@ -20,7 +20,7 @@ public class ExpenseTest {
         check("Expense type",
                 expense.getTransactionType().equals("Expense"));
 
-        // Test setters
+        // testing setters
         expense.setPaymentMethod("Cash");
         expense.setMerchantName("Local Store");
         expense.setRecurring(true);
@@ -33,12 +33,12 @@ public class ExpenseTest {
 
         check("toString", expense.toString().contains("Local Store"));
 
-        // Merchant name is allowed to be blank
+        // Merchant name allowed in the blank
         expense.setMerchantName("");
         check("Blank merchant allowed",
                 expense.getMerchantName().equals(""));
 
-        // Test invalid payment method
+        // testing invalid payment method
         try {
             expense.setPaymentMethod(" ");
             check("Reject blank payment method", false);
@@ -46,7 +46,7 @@ public class ExpenseTest {
             check("Reject blank payment method", true);
         }
 
-        // Test invalid merchant
+        // testing invalid merchant
         try {
             expense.setMerchantName(null);
             check("Reject null merchant", false);

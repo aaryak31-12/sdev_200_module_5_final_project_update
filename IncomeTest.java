@@ -1,7 +1,7 @@
 
 import java.time.LocalDate;
 
-// Tests the Income class
+// testing the Income class
 public class IncomeTest {
 
     public static void main(String[] args) {
@@ -11,7 +11,7 @@ public class IncomeTest {
                 "Weekly paycheck", "Work",
                 "Job", "Salary");
 
-        // Test getters
+        // testing getters
         check("Amount", income.getAmount() == 800.00);
         check("Source", income.getSource().equals("Job"));
         check("Income type",
@@ -19,7 +19,7 @@ public class IncomeTest {
         check("Transaction type",
                 income.getTransactionType().equals("Income"));
 
-        // Test setters
+        // testing setters
         income.setSource("Freelance Work");
         income.setIncomeType("Side Income");
 
@@ -31,7 +31,7 @@ public class IncomeTest {
         check("toString",
                 income.toString().contains("Side Income"));
 
-        // Test invalid source
+        // testing invalid source
         try {
             income.setSource("");
             check("Reject blank source", false);
@@ -39,7 +39,7 @@ public class IncomeTest {
             check("Reject blank source", true);
         }
 
-        // Test invalid income type
+        // testing invalid income type
         try {
             income.setIncomeType(" ");
             check("Reject blank income type", false);

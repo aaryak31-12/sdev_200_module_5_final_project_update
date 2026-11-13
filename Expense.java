@@ -8,13 +8,13 @@ public class Expense extends Transaction {
     private String merchantName;
     private boolean recurring;
 
-    // Constructor
+    //constructor
     public Expense(int transactionID, double amount,
                    LocalDate date, String description,
                    String category, String paymentMethod,
                    String merchantName, boolean recurring) {
 
-        // Calls constructor of parent class
+        // calling constructor of parent class
         super(transactionID, amount, date, description, category);
 
         setPaymentMethod(paymentMethod);
@@ -57,13 +57,13 @@ public class Expense extends Transaction {
         this.recurring = recurring;
     }
 
-    // Returns type of transaction
+    //returning type of transaction
     @Override
     public String getTransactionType() {
         return "Expense";
     }
 
-    // Displays expense information
+    // displaying expense information
     @Override
     public String toString() {
         return super.toString()
